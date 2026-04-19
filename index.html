@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>お気に入りレシピ帳</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(228, 154, 74, 0.18), transparent 24%),
+          linear-gradient(180deg, #fff7ef 0%, #f6eadb 100%);
+        color: #2b2b2b;
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+      }
+      h1 {
+        margin-bottom: 10px;
+      }
+      .lead {
+        max-width: 640px;
+        line-height: 1.7;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+        margin-top: 28px;
+      }
+      article {
+        background: rgba(255, 252, 247, 0.95);
+        border: 1px solid #e5c49a;
+        border-radius: 18px;
+        padding: 18px;
+        box-shadow: 0 14px 34px rgba(104, 68, 22, 0.08);
+      }
+      .tag {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #f3dcc0;
+        font-size: 12px;
+      }
+      ul {
+        padding-left: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>お気に入りレシピ帳</h1>
+      <p class="lead">週末にまた作りたいレシピを3品まとめた。最初は一覧だけのページにしようとしたが、見返しやすさを優先して、調理時間とポイントも一緒に載せる構成にした。</p>
+
+      <section class="grid">
+        <article>
+          <span class="tag">15分</span>
+          <h2>ツナと大葉の和風パスタ</h2>
+          <ul>
+            <li>材料: パスタ、ツナ缶、大葉、しょうゆ、バター</li>
+            <li>ポイント: バターを最後に入れると香りがまとまる</li>
+            <li>感想: 平日の昼でも作りやすい</li>
+          </ul>
+        </article>
+
+        <article>
+          <span class="tag">25分</span>
+          <h2>鶏むね肉の甘酢炒め</h2>
+          <ul>
+            <li>材料: 鶏むね肉、玉ねぎ、ピーマン、酢、しょうゆ、砂糖</li>
+            <li>ポイント: 片栗粉を薄くまぶすと食感がよい</li>
+            <li>感想: 冷めても味がぼやけにくい</li>
+          </ul>
+        </article>
+
+        <article>
+          <span class="tag">10分</span>
+          <h2>豆腐とわかめの味噌汁</h2>
+          <ul>
+            <li>材料: 豆腐、乾燥わかめ、ねぎ、だし、味噌</li>
+            <li>ポイント: 味噌は火を止めてから溶く</li>
+            <li>感想: 他のおかずと合わせやすい</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
