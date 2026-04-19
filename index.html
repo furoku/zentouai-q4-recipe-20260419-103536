@@ -5,88 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>お気に入りレシピ帳</title>
     <style>
+      :root {
+        --bg: #f7efe4;
+        --panel: rgba(255, 252, 247, 0.95);
+        --line: #dfc29a;
+        --ink: #2a2a2a;
+        --accent: #966235;
+        --soft: #f4e0c3;
+      }
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+        color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(228, 154, 74, 0.18), transparent 24%),
-          linear-gradient(180deg, #fff7ef 0%, #f6eadb 100%);
-        color: #2b2b2b;
+          radial-gradient(circle at top left, rgba(227, 164, 84, 0.18), transparent 22%),
+          radial-gradient(circle at bottom right, rgba(150, 98, 53, 0.08), transparent 26%),
+          linear-gradient(180deg, #fff8ef 0%, var(--bg) 100%);
       }
       main {
-        max-width: 980px;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 32px 20px 56px;
+        padding: 36px 20px 64px;
       }
-      h1 {
-        margin-bottom: 10px;
+      .hero {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: start;
       }
-      .lead {
-        max-width: 640px;
-        line-height: 1.7;
+      .hero-copy h1 {
+        margin-bottom: 12px;
+        font-size: clamp(32px, 4vw, 52px);
+        line-height: 1.1;
+      }
+      .hero-copy p {
+        max-width: 620px;
+        line-height: 1.8;
+        font-size: 16px;
+      }
+      .hero-note {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 18px 38px rgba(78, 49, 20, 0.08);
+      }
+      .hero-note strong {
+        color: var(--accent);
+      }
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 18px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .tag-row li {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: var(--soft);
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
       }
       .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 18px;
-        margin-top: 28px;
+        margin-top: 30px;
       }
       article {
-        background: rgba(255, 252, 247, 0.95);
-        border: 1px solid #e5c49a;
-        border-radius: 18px;
-        padding: 18px;
-        box-shadow: 0 14px 34px rgba(104, 68, 22, 0.08);
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(78, 49, 20, 0.08);
       }
-      .tag {
+      .time {
         display: inline-block;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         padding: 6px 10px;
         border-radius: 999px;
-        background: #f3dcc0;
+        background: #f0dcc2;
         font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      article h2 {
+        margin: 0 0 12px;
+        line-height: 1.3;
       }
       ul {
         padding-left: 18px;
+        line-height: 1.8;
+      }
+      footer {
+        margin-top: 24px;
+        color: #5b5347;
+        font-size: 14px;
+      }
+      @media (max-width: 760px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>お気に入りレシピ帳</h1>
-      <p class="lead">忙しい日でも作りやすく、また食べたくなる3品をまとめました。調理時間とひとことポイントも添えているので、その日の気分に合わせて選べます。</p>
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>お気に入りレシピ帳</h1>
+          <p>忙しい日でも作りやすく、また食べたくなる3品をまとめました。調理時間とひとことポイントも添えているので、その日の気分に合わせて選べます。</p>
+          <ul class="tag-row" aria-label="レシピの特徴">
+            <li>15分前後で作れる</li>
+            <li>平日ごはん向け</li>
+            <li>材料を確認しやすい</li>
+          </ul>
+        </div>
+        <aside class="hero-note">
+          <p><strong>選び方の目安</strong></p>
+          <p>しっかり主菜を作りたい日は甘酢炒め、手早く済ませたい日は和風パスタ、あと一品ほしい日は味噌汁がおすすめです。</p>
+        </aside>
+      </section>
 
       <section class="grid">
         <article>
-          <span class="tag">15分</span>
+          <span class="time">15分</span>
           <h2>ツナと大葉の和風パスタ</h2>
           <ul>
             <li>材料: パスタ、ツナ缶、大葉、しょうゆ、バター</li>
             <li>ポイント: バターを最後に入れると香りがまとまる</li>
-            <li>感想: 平日の昼でも作りやすい</li>
+            <li>おすすめの場面: 平日の昼を手早く済ませたいとき</li>
           </ul>
         </article>
 
         <article>
-          <span class="tag">25分</span>
+          <span class="time">25分</span>
           <h2>鶏むね肉の甘酢炒め</h2>
           <ul>
             <li>材料: 鶏むね肉、玉ねぎ、ピーマン、酢、しょうゆ、砂糖</li>
             <li>ポイント: 片栗粉を薄くまぶすと食感がよい</li>
-            <li>感想: 冷めても味がぼやけにくい</li>
+            <li>おすすめの場面: 作り置きも兼ねて主菜を作りたいとき</li>
           </ul>
         </article>
 
         <article>
-          <span class="tag">10分</span>
+          <span class="time">10分</span>
           <h2>豆腐とわかめの味噌汁</h2>
           <ul>
             <li>材料: 豆腐、乾燥わかめ、ねぎ、だし、味噌</li>
             <li>ポイント: 味噌は火を止めてから溶く</li>
-            <li>感想: 他のおかずと合わせやすい</li>
+            <li>おすすめの場面: 他のおかずに合わせて一品足したいとき</li>
           </ul>
         </article>
       </section>
+
+      <footer>
+        その日の時間と気分に合わせて選びやすいよう、材料とポイントを先に確認できる構成にしています。
+      </footer>
     </main>
   </body>
 </html>
