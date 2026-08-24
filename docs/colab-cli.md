@@ -48,9 +48,36 @@ colab-cli --help
 colab-cli set-config /path/to/client_secrets.json
 ```
 
+**重要**: `set-config` は渡されたファイルをファイル名そのままで設定ディレクトリに
+コピーするだけで、認証時に読まれるのは `client_secrets.json` という名前のファイル
+だけです。別名 (`my_secrets.json` など) を渡しても `Config File set Successfully`
+と表示されますが認証は通りません。必ず `client_secrets.json` にリネームしてから
+渡してください。
+
 初回のコマンド実行時にブラウザが開き、Google アカウントでの認可を求められます。
-ブラウザを開けない環境 (CI やリモートコンテナなど) では認可を完了できないため、
-ローカルマシンで一度認証してから生成された認証情報を持ち込んでください。
+
+### ブラウザを開けない環境で認証する
+
+colab-cli は PyDrive の `LocalWebserverAuth` を使い、`localhost:8080` で認可コードの
+コールバックを待ち受けます。リモートコンテナや SSH 先ではこの `localhost` に手元の
+ブラウザから到達できませんが、コールバックを手動で流し込めば認証を完了できます。
+`tools/colab-cli-auth.sh` がこの手順を自動化します。
+
+```bash
+# 1. 認証フローを開始し、認証 URL を表示する
+./tools/colab-cli-auth.sh start
+
+# 2. 表示された URL を手元のブラウザで開いて認可する
+#    → http://localhost:8080/?code=... にリダイレクトされ、接続エラーになる (正常)
+
+# 3. URL バーの内容 (または code= の値) をそのまま渡す
+./tools/colab-cli-auth.sh code 'http://localhost:8080/?code=4/0Ab...'
+```
+
+成功すると `~/.config/colab-cli/mycreds.txt` に認証情報が保存されます。
+
+別の手段として、ローカルマシンで一度認証してから `client_secrets.json` と
+`mycreds.txt` を持ち込む方法もあります。
 
 複数の Google アカウントにログインしている場合は、使うアカウントの番号
 (0 始まり) を指定します。
