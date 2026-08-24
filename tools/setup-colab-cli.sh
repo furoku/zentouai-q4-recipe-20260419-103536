@@ -17,6 +17,10 @@ python3 -m venv "$VENV"
 mkdir -p "$BIN_DIR"
 ln -sf "$VENV/bin/colab-cli" "$BIN_DIR/colab-cli"
 
+# colab-cli の set-auth-user は設定ディレクトリを自分では作らないため、
+# 先に作っておかないと FileNotFoundError で落ちる。
+mkdir -p "${XDG_CONFIG_HOME:-$HOME/.config}/colab-cli"
+
 "$BIN_DIR/colab-cli" --help >/dev/null
 echo "colab-cli を $BIN_DIR/colab-cli にインストールしました。"
 echo "PATH に $BIN_DIR が含まれていることを確認してください。"

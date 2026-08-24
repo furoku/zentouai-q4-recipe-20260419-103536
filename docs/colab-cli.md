@@ -59,6 +59,18 @@ colab-cli set-config /path/to/client_secrets.json
 colab-cli set-auth-user 0
 ```
 
+### 既知のハマりどころ
+
+- `set-auth-user` は設定ディレクトリを自分では作らないため、`set-config` より先に
+  実行すると `FileNotFoundError` で落ちます。`tools/setup-colab-cli.sh` は
+  `~/.config/colab-cli/` を先に作るので、このスクリプトを使っていれば順序は
+  問いません。
+- 認可が完了すると、アクセストークンが `~/.config/colab-cli/mycreds.txt` に
+  保存されます。ブラウザを開けない環境では、ローカルで一度認証してから
+  `client_secrets.json` と `mycreds.txt` の 2 つを同じ場所にコピーすれば使えます。
+  (`mycreds.txt` は Drive への全アクセス権を持つ認証情報なので、リポジトリには
+  絶対にコミットしないでください。)
+
 ## 3. 使い方
 
 ```bash
@@ -77,6 +89,9 @@ colab-cli pull-nb my_notebook.ipynb
 # ローカルの内容で Colab 側を上書き
 colab-cli push-nb my_notebook.ipynb
 ```
+
+`list-nb` は再帰的に探索せず、カレントディレクトリ直下の `.ipynb` だけを
+表示します。
 
 `pull-nb` / `push-nb` は上書きなので、git で管理しているノートブックは
 コミット済みの状態で実行するのが安全です。
